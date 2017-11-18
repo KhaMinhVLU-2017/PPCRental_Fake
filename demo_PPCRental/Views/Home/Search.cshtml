@@ -1,0 +1,30 @@
+﻿@using demo_PPCRental.Models
+@model IEnumerable<PROPERTY>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4 product_div">
+        <img class="product_div_img" style="width:100%;" src="~/Images/@item.Avatar" />
+        <div class="col-md-12 product_content">
+            <div class="col-md-12 product_sub">
+                @{
+                    DemoPPCRentalEntities db = new DemoPPCRentalEntities();
+                    var distric = from quan in db.PROPERTies
+                                  join quannew in db.DISTRICTs on quan.District_ID equals quannew.ID
+                                  where quannew.ID == item.District_ID
+                                  select quannew.DistrictName;
+
+                }
+                <p class="p_District">@distric.FirstOrDefault()</p>
+                <hr class="hr_hr" />
+                <p class="p_Name">@item.PropertyName</p>
+            </div>
+        </div>
+    </div>
+                    }

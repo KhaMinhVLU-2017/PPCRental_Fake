@@ -1,0 +1,37 @@
+﻿@using demo_PPCRental.Models
+@using System.Linq;
+@model List<PROPERTY>
+@{
+    ViewBag.Title = ".::PPCRental::.";
+}
+
+<div class="container">
+    <div class="row">
+        <div style="text-align:center;" class="col-md-12">
+            <h1>Danh sách dự án</h1>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 product_div">
+                <a href="~/Home/Detail/@item.ID">
+                    <img class="product_div_img" style="width:100%;" src="~/Images/@item.Avatar" />
+                    <div class="col-md-12 product_content">
+                        <div class="col-md-12 product_sub">
+                            @{
+                                DemoPPCRentalEntities db = new DemoPPCRentalEntities();
+                                var distric = from quan in db.PROPERTies
+                                              join quannew in db.DISTRICTs on quan.District_ID equals quannew.ID
+                                              where quannew.ID == item.District_ID
+                                              select quannew.DistrictName;
+
+                            }
+                            <p class="p_District">@distric.FirstOrDefault()</p>
+                            <hr class="hr_hr" />
+                            <p class="p_Name">@item.PropertyName</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+         }
+    </div>
+</div>

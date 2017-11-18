@@ -1,0 +1,40 @@
+﻿@using demo_PPCRental.Models
+@model PROPERTY
+@{
+    ViewBag.Title = "Detail";
+    DemoPPCRentalEntities db = new DemoPPCRentalEntities();
+    var Quan = from quan in db.PROPERTies
+               join quannew in db.DISTRICTs on quan.District_ID equals quannew.ID
+               where quan.ID == Model.District_ID
+               select quannew.DistrictName;
+}
+
+<h2>Detail</h2>
+
+<table>
+    <tr>
+        <th></th>           
+        <th></th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(s => s.DISTRICT)</td>
+        <td>@Model.DISTRICT.DistrictName</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(s => s.PropertyName)</td>
+        <td>@Model.PropertyName</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(s => s.Content)</td>
+        <td>@Model.Content</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(s => s.Images)</td>
+        <td><img class="img-responsive" src="~/Images/@Model.Avatar" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@Html.ActionLink("Back","Index")</td>
+    </tr>
+ 
+</table>

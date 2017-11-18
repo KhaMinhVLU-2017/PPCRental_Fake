@@ -1,0 +1,27 @@
+﻿@using demo_PPCRental.Models
+@model IEnumerable<USER>
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Username", new { @class = "text-info" })
+                @Html.TextBox("txt_user", "", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Password", new { @class = "text-info" })
+                @Html.TextBox("txt_pass", "", new { @class = "form-control" })
+            </div>
+            <input type="submit" value="Login" />
+            }
+        </div>
+    </div>
+</div>
